@@ -5,11 +5,8 @@ import{hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 // ek ta function thakle ta export korte dayja er formate ta use kora hoy.
 import { deliveryOption, getDeliverOption } from '../../data/deliveryOption.js';
-hello();
+import { renderPaymentSummary } from './paymentSummary.js';
 
-const today= dayjs();
-const deliveryDate=today.add(7, 'days');
-console.log(deliveryDate.format('dddd, MMMM D'));
 
 export function renderOderSummary(){
 
@@ -120,6 +117,7 @@ document.querySelectorAll('.js-delete-link')
         `.js-cart-item-container-${productId}`
       );
       container.remove();
+      renderPaymentSummary();
     });
   });
 
@@ -128,6 +126,7 @@ document.querySelectorAll('.js-delete-link')
     const {productId,deliveryOptionId}=element.dataset;
      updateDeliveryOption(productId,deliveryOptionId);
      renderOderSummary();
+     renderPaymentSummary();
   });
   });
 
